@@ -1,0 +1,31 @@
+name: Gerar Slides PDF
+
+on:
+  push:
+    paths:
+      - "docs/*.md"
+      - "docs/pandoc.yaml"
+
+jobs:
+  build-slides:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Instalar Pandoc e LaTeX
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y pandoc texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-xetex
+
+      - name: Converter Markdown em PDF
+        run: |
+          mkdir -p slides
+          pandoc docs/presentation.md --defaults=docs/pandoc.yaml -o slides/slides.pdf
+
+      - name: Publicar Artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: slides-pdf
+          path: slides/slides.pdf

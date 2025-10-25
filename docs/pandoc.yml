@@ -1,0 +1,10 @@
+pdf-engine: xelatex
+to: beamer
+slide-level: 2
+metadata:
+  title: "Introdução à Automação"
+  author: "Seu Nome"
+  date: "2025-10-24"
+variables:
+  theme: "Madrid"
+  fontsize: 11pt
